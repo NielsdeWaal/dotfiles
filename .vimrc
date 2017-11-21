@@ -42,6 +42,9 @@ set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 "Set scroll off to 5 rows
 set scrolloff=5
 
+"Nerdtree toggle
+map <C-y> :NERDTreeToggle<CR>
+
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -54,6 +57,7 @@ Plugin 'clausreinke/typescript-tools'
 Plugin 'pangloss/vim-javascript'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'scrooloose/nerdTree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'lervag/vimtex'
 Plugin 'tpope/vim-fugitive'
 Plugin 'DoxygenToolkit.vim'
