@@ -6,6 +6,7 @@ function! NumberToggle()
 	endif
 endfunc
 
+set cursorline
 set showmatch
 set nocompatible
 set showcmd
