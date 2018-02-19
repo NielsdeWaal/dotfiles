@@ -43,9 +43,6 @@ set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 "Set scroll off to 5 rows
 set scrolloff=5
 
-"Nerdtree toggle
-map <C-y> :NERDTreeToggle<CR>
-
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -57,6 +54,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'clausreinke/typescript-tools'
 Plugin 'pangloss/vim-javascript'
 Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdTree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'lervag/vimtex'
@@ -88,3 +86,9 @@ let g:DoxygenToolkit_authorName="Niels de Waal"
 let g:clang_format#code_style="llvm"
 autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
 autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
+
+"Nerdtree toggle
+map <C-y> :NERDTreeToggle<CR>
+
+"Tagbar toggle
+nmap <C-u> :TagbarToggle<CR>

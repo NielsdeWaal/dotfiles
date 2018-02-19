@@ -150,3 +150,5 @@ export GPG_tty=$(tty)
 export KEYID=0x0F87C4C2C61A99111A92A1C75772008B324C463F
 
 alias config='/usr/bin/git --git-dir=/home/niels/.cfg/ --work-tree=/home/niels'
+
+export PS1="\[$(tput bold)\]\[$(tput setaf 2)\]\h\[$(tput setaf 7)\] - \[$(tput setaf 1)\]\u\[$(tput setaf 7)\] - \[$(tput setaf 4)\]\W \[$(tput setaf 7)\]\[$(tput sgr0)\]\\$ \[$(tput sgr0)\]"
