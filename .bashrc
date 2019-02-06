@@ -135,20 +135,30 @@ export PATH=${PATH}:$HOME/Android/Sdk/platform-tools:$HOME/Android/tools:$HOME/A
 
 # GPG configuration
 # Makes sure the gpg ssh agent is used instead of the normal ssh agent
-if ! pgrep -x -u "${USER}" gpg-agent >/dev/null 2>&1; then
-	gpg-connect-agent /bye >/dev/null 2>&1
-fi
-unset SSH_AGENT_PID
-if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
-	export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
-fi
-GPG_TTY=$(tty)
-export GPG_TTY
-gpg-connect-agent updatestartuptty /bye > /dev/null
-export GPG_tty=$(tty)
+#if ! pgrep -x -u "${USER}" gpg-agent >/dev/null 2>&1; then
+#	gpg-connect-agent /bye >/dev/null 2>&1
+#fi
+#unset SSH_AGENT_PID
+#if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+#	export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
+#fi
+#GPG_TTY=$(tty)
+#export GPG_TTY
+#gpg-connect-agent updatestartuptty /bye > /dev/null
+#export GPG_tty=$(tty)
+export GPG_TTY="$(tty)"
+#export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+#gpgconf --launch gpg-agent
+export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
+gpg-connect-agent updatestartuptty /bye
+
 # GPG fingerprint for nielsdwaal@gmail.com
 export KEYID=0x0F87C4C2C61A99111A92A1C75772008B324C463F
 
 alias config='/usr/bin/git --git-dir=/home/niels/.cfg/ --work-tree=/home/niels'
 
 export PS1="\[$(tput bold)\]\[$(tput setaf 2)\]\h\[$(tput setaf 7)\] - \[$(tput setaf 1)\]\u\[$(tput setaf 7)\] - \[$(tput setaf 4)\]\W \[$(tput setaf 7)\]\[$(tput sgr0)\]\\$ \[$(tput sgr0)\]"
+
+export IDF_PATH=~/esp/esp-idf
+export PATH="$PATH:$HOME/esp/xtensa-esp32-elf/bin"
+export EXTRA_COMPONENT_DIRS=$IDF_PATH/tools/unit-test-app/components
