@@ -11,6 +11,8 @@ set showmatch
 set nocompatible
 set showcmd
 set confirm
+set number
+set relativenumber
 
 "Disable arrow key's
 nnoremap <Up> <NOP>
@@ -37,8 +39,13 @@ nmap <C-c> :.w! ~/.vimbuffer<CR>
 "Paste from global vim buffer
 map <C-p> :r ~/.vimbuffer<CR>
 
+"Vertical split for ctags
+map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+
 "Set tab to 4 spaces
-set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+"set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+"Set tab to 4 space width tab
+set autoindent noexpandtab tabstop=4 shiftwidth=4 smarttab
 
 "Set scroll off to 5 rows
 set scrolloff=5
@@ -69,6 +76,12 @@ filetype plugin indent on
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 
+" CPP highlighting
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+let g:cpp_experimental_simple_template_highlight = 1
+
 " Color Scheme
 syntax enable
 set background=dark
@@ -92,3 +105,29 @@ map <C-y> :NERDTreeToggle<CR>
 
 "Tagbar toggle
 nmap <C-u> :TagbarToggle<CR>
+
+set list
+"set listchars=eol:$,tab:>-,trail:·,extends:>,precedes:<
+"set list listchars=tab:>-,trail:.,extends:>
+"set listchars=trail:.,tab:.,extends: 
+"set list listchars=tab:\|_,trail:·
+"set list listchars=tab:▸\ ,trail:·
+set list listchars=tab:»\ ,trail:·
+"set listchars+=trail::
+
+"Vimtex settings
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
+let g:vimtex_compiler_latexmk = {
+    \ 'options' : [
+    \   '-pdf',
+    \   '-shell-escape',
+    \   '-verbose',
+    \   '-file-line-error',
+    \   '-synctex=1',
+    \   '-interaction=nonstopmode',
+    \ ],
+    \}
