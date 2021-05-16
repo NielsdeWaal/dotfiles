@@ -44,6 +44,12 @@ dotfiles:
   f_zshrc:
     src: zshrc
     dst: ~/.zshrc
+  f_etc_makepkg.conf:
+    src: etc/makepkg.conf
+    dst: /etc/makepkg.conf
+  f_etc_pacman.conf:
+    src: etc/pacman.conf
+    dst: /etc/pacman.conf
 profiles:
   WS500:
     dotfiles:
@@ -59,3 +65,5 @@ profiles:
     - f_config_zathura_zathurarc
     - f_config_xmobar_xmobarrc0
     - f_zshrc
+    - f_etc_makepkg.conf
+    - f_etc_pacman.conf
