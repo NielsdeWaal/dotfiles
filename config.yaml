@@ -50,6 +50,9 @@ dotfiles:
   f_etc_pacman.conf:
     src: etc/pacman.conf
     dst: /etc/pacman.conf
+  f_config_rofi_config.rasi:
+    src: config/rofi/config.rasi
+    dst: ~/.config/rofi/config.rasi
 profiles:
   WS500:
     dotfiles:
@@ -67,3 +70,4 @@ profiles:
     - f_zshrc
     - f_etc_makepkg.conf
     - f_etc_pacman.conf
+    - f_config_rofi_config.rasi
