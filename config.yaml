@@ -1,0 +1,61 @@
+config:
+  backup: true
+  banner: true
+  create: true
+  dotpath: dotfiles
+  keepdot: false
+  link_dotfile_default: nolink
+  link_on_import: nolink
+  longkey: true
+dotfiles:
+  f_doom.d_config.el:
+    src: doom.d/config.el
+    dst: ~/.doom.d/config.el
+  f_doom.d_custom.el:
+    src: doom.d/custom.el
+    dst: ~/.doom.d/custom.el
+  f_doom.d_init.el:
+    src: doom.d/init.el
+    dst: ~/.doom.d/init.el
+  f_doom.d_packages.el:
+    src: doom.d/packages.el
+    dst: ~/.doom.d/packages.el
+  f_xmonad_xmonad.hs:
+    src: xmonad/xmonad.hs
+    dst: ~/.xmonad/xmonad.hs
+  f_config_i3_config:
+    src: config/i3/config
+    dst: ~/.config/i3/config
+  f_config_kitty_kitty.conf:
+    src: config/kitty/kitty.conf
+    dst: ~/.config/kitty/kitty.conf
+  f_config_mopidy_mopidy.conf:
+    src: config/mopidy/mopidy.conf
+    dst: ~/.config/mopidy/mopidy.conf
+  f_config_trizen_trizen.conf:
+    src: config/trizen/trizen.conf
+    dst: ~/.config/trizen/trizen.conf
+  f_config_zathura_zathurarc:
+    src: config/zathura/zathurarc
+    dst: ~/.config/zathura/zathurarc
+  f_config_xmobar_xmobarrc0:
+    src: config/xmobar/xmobarrc0
+    dst: ~/.config/xmobar/xmobarrc0
+  f_zshrc:
+    src: zshrc
+    dst: ~/.zshrc
+profiles:
+  WS500:
+    dotfiles:
+    - f_doom.d_config.el
+    - f_doom.d_custom.el
+    - f_doom.d_init.el
+    - f_doom.d_packages.el
+    - f_xmonad_xmonad.hs
+    - f_config_i3_config
+    - f_config_kitty_kitty.conf
+    - f_config_mopidy_mopidy.conf
+    - f_config_trizen_trizen.conf
+    - f_config_zathura_zathurarc
+    - f_config_xmobar_xmobarrc0
+    - f_zshrc
