@@ -50,6 +50,15 @@ dotfiles:
   f_config_xmobar_xmobarrc0_1:
     src: config/xmobar/xmobarrc0
     dst: ~/.config/xmobar/xmobarrc0
+  f_etc_makepkg.conf:
+    src: etc/makepkg.conf
+    dst: /etc/makepkg.conf
+  f_etc_pacman.conf:
+    src: etc/pacman.conf
+    dst: /etc/pacman.conf
+  f_config_rofi_config.rasi:
+    src: config/rofi/config.rasi
+    dst: ~/.config/rofi/config.rasi
 profiles:
   WS500:
     dotfiles:
@@ -69,3 +78,6 @@ profiles:
     dotfiles:
     - f_zshrc_1
     - f_config_xmobar_xmobarrc0_1
+    - f_etc_makepkg.conf
+    - f_etc_pacman.conf
+    - f_config_rofi_config.rasi
