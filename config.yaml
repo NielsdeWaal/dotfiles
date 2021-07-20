@@ -44,6 +44,12 @@ dotfiles:
   f_zshrc:
     src: zshrc
     dst: ~/.zshrc
+  f_zshrc_1:
+    src: zshrc
+    dst: ~/.zshrc
+  f_config_xmobar_xmobarrc0_1:
+    src: config/xmobar/xmobarrc0
+    dst: ~/.config/xmobar/xmobarrc0
 profiles:
   WS500:
     dotfiles:
@@ -59,3 +65,7 @@ profiles:
     - f_config_zathura_zathurarc
     - f_config_xmobar_xmobarrc0
     - f_zshrc
+  GLaDOS:
+    dotfiles:
+    - f_zshrc_1
+    - f_config_xmobar_xmobarrc0_1
