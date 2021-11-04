@@ -27,7 +27,8 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+;; (setq doom-theme 'doom-one)
+(setq doom-theme 'modus-vivendi)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -74,24 +75,8 @@
 ;; Hide emphasis markers like * and _
 (setq org-hide-emphasis-markers t)
 ;; Refresh images after running src block
-(eval-after-load 'org
-  (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images))
-
-;; Org roam
-;; (use-package! org-roam
-;;   :commands (org-roam-insert org-roam-find-file org-roam)
-;;   :init
-;;   (setq org-roam-buffer-width 0.1)
-;;   (map! :leader
-;;         :prefix "n"
-;;         :desc "Org-Roam-Insert" "i" #'org-roam-insert
-;;         :desc "Org-Roam-Find"   "/" #'org-roam-find-file
-;;         :desc "Org-Roam-Buffer" "r" #'org-roam)
-;;   )
-
-(setq org-agenda-files '("~/gtd/inbox.org"
-                         "~/gtd/todo.org"
-                         "~/gtd/Resources.org"))
+;; (eval-after-load 'org
+;;   (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images))
 
 ;; (setq org-capture-templates '(("t" "TODO [inbox]" entry
 ;;                                (file+headline "~/gtd/inbox.org" "Tasks")
@@ -108,26 +93,94 @@
 ;;                                "* NOTE \n %i\n" :empty-lines 1)
 ;;                                )
 ;;                               )
-(after! org
-  (setq org-capture-templates
-               '(("t" "TODO [inbox]" entry
-                (file+headline "~/gtd/inbox.org" "Tasks")
-                "* TODO %i%?")
-                ("l" "org-procol-capture" entry
-                (file "~/gtd/inbox.org")
-                "* TODO [[%:link][%:description]]\n\n %i" :immediate-finish t)
-                ("n" "Take a note")
-                ("nl" "Note link" entry
-                (file+headline "~/gtd/inbox.org" "Resources")
-                "* %(org-cliplink-capture) \n %i\n" :empty-lines 1)
-                ("nn" "Note" entry
-                (file+headline "~/gtd/inbox.org" "Resources")
-                "* NOTE \n %i\n" :empty-lines 1)
-                )
-               )
-  )
 
-(setq org-refile-targets '((("~/gtd/todo.org" "~/gtd/Projects.org" "~/gtd/Resources.org") :maxlevel . 3)))
+;; GTD workflow
+(setq org-agenda-files (list "~/gtd/inbox.org"
+                             "~/gtd/todo.org"
+                             "~/gtd/Resources.org"))
+(setq org-refile-targets '(("~/gtd/gtd.org" :maxlevel . 3)
+                           ("~/gtd/someday.org" :level . 1)
+                           ("~/gtd/tickler.org" :maxlevel . 2)))
+(setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
+(setq org-capture-templates '(("t" "Todo [inbox]" entry
+                               (file+headline "~/gtd/inbox.org" "Tasks")
+                               "* TODO %i%?")
+                              ("T" "Tickler" entry
+                               (file+headline "~/gtd/tickler.org" "Tickler")
+                               "* %i%? \n %U")))
+;; (setq org-capture-templates
+;;         '(("t" "TODO [inbox]" entry
+;;         (file+headline "~/gtd/inbox.org" "Tasks")
+;;         "* TODO %i%?")
+;;         ("T" "Tickler" entry
+;;         (file-headline "~/gtd/tickler.org" "Tickler")
+;;         "I %i%? \n %U")
+;;         ("l" "org-procol-capture" entry
+;;         (file "~/gtd/inbox.org")
+;;         "* TODO [[%:link][%:description]]\n\n %i" :immediate-finish t)
+;;         ("n" "Take a note")
+;;         ("nl" "Note link" entry
+;;         (file+headline "~/gtd/inbox.org" "Resources")
+;;         "* %(org-cliplink-capture) \n %i\n" :empty-lines 1)
+;;         ("nn" "Note" entry
+;;         (file+headline "~/gtd/inbox.org" "Resources")
+;;         "* NOTE \n %i\n" :empty-lines 1)
+;;         ))
+
+;; (setq org-refile-targets '((("~/gtd/todo.org" "~/gtd/Projects.org" "~/gtd/Resources.org") :maxlevel . 3)))
+
+;; Org roam
+(after! org-roam
+  (require 'org-roam-protocol)
+  (setq org-roam-capture-ref-templates
+        '(("r" "ref" plain (function org-roam-capture--get-point)
+           "%?"
+           :file-name "websites/${slug}"
+           :head "#+TITLE: ${title}
+#+ROAM_KEY: ${ref}
+- source :: ${ref}"
+           :unnarrowed t))))
+
+;; (defun make-capture-frame (&optional capture-url)
+;;   "Create a new frame and run org-capture."
+;;   (interactive)
+;;   (make-frame '((name . "CAPTURE")
+;;                 (width . 120)
+;;                 (height . 15)))
+;;   (select-frame-by-name "CAPTURE")
+;;   (setq word-wrap 1)
+;;   (setq truncate-lines nil)
+;;   (if capture-url (org-protocol-capture capture-url) (org-protocol-capture)))
+
+;; (org-roam-protocol-open-ref "org-protocol://roam-ref?ref='+aaaaa+'&title='+bbbbbbb")
+;; (org-protocol-capture "org-protocol://roam-ref?ref='+aaaaa+'&title='+bbbbbbb")
+;; (org-roam-protocol-open-file)
+;; (defun make-roam-capture-frame (&optional capture-url)
+;;   "Create a new frame and run org-capture."
+;;   (interactive)
+;;   (make-frame '((name . "CAPTURE")
+;;                 (width . 120)
+;;                 (height . 15)))
+;;   (select-frame-by-name "CAPTURE")
+;;   (setq word-wrap 1)
+;;   (setq truncate-lines nil)
+;;   (if capture-url (org-roam-protocol-open-ref capture-url) (org-roam-protocol-open-file)))
+
+;; (defadvice org-roam-pro)
+
+;; (use-package org-roam-protocol
+;;   :after org-protocol)
+;; (use-package! org-roam
+;;   :commands (org-roam-insert org-roam-find-file org-roam)
+;;   :init
+;;   (setq org-roam-buffer-width 0.1)
+;;   (map! :leader
+;;         :prefix "n"
+;;         :desc "Org-Roam-Insert" "i" #'org-roam-insert
+;;         :desc "Org-Roam-Find"   "/" #'org-roam-find-file
+;;         :desc "Org-Roam-Buffer" "r" #'org-roam)
+;;   )
+
 
 (setq mu4e-maildir "~/Mail")
 (set-email-account! "nielsdwaal"
@@ -158,8 +211,40 @@
         "^Yubikey for .*: ?$"
         "^Enter PIN for '.*': ?$"))
 
+(setenv "KEYID"
+        "0x0F87C4C2C61A99111A92A1C75772008B324C463F")
+(setenv "SSH_AUTH_SOCK"
+        "/run/user/1000/gnupg/S.gpg-agent.ssh")
+
 (require 'elfeed-goodies)
 (elfeed-goodies/setup)
 (setq elfeed-goodies/entry-pane-size 0.5)
 (setq elfeed-feeds (quote
                     (("http://feeds.feedburner.com/tweakers/nieuws" tweakers))))
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((python . t)
+   (ipython . t)
+   (clojure . t)
+   ))
+
+;; (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
+
+;; Uncomment this for colemak layout
+;; (setq avy-keys '(?a ?r ?s ?t ?g ?m ?n ?e ?i ?o))
+
+;; (add-hook! 'c-mode-hook
+;;            (unless (locate-dominating-file default-directory ".clang-format")
+;;              (format-all-mode -1)
+;;              (setq-hook! +format-with-lsp nil)))
+
+;; (setq-hook! 'c-mode-hook +format-with-lsp nil)
+
+;; LSP
+(setq lsp-ui-doc-enable nil)
+;; (setq cider-jack-in-dependencies
+;;       (delete-dups
+;;        (append
+;;         cider-jack-in-dependencies
+;;         lispy-cider-jack-in-dependencies)))

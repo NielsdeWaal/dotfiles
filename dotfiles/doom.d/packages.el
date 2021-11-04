@@ -49,6 +49,7 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
+(package! modus-themes)
 
 (package! org-cliplink)
 
@@ -56,3 +57,19 @@
   :pin "2380562fbec8a17ec193891da755a502a2ccd252")
 
 (package! elfeed-goodies)
+
+(package! ob-ipython)
+
+(package! screenshot :recipe (:host github :repo "tecosaur/screenshot")
+  :pin "c6061dd6b005f4e9ebcb8be4959cb9b04bd8b6ac")
+
+;; NOTE This is to fix cider not being able to start/connect with a session
+(package! map :pin "bb50dbaafc0f71743bd9ffd5784258a9fd682c20")
+
+(package! gitconfig-mode
+	  :recipe (:host github :repo "magit/git-modes"
+			 :files ("gitconfig-mode.el")))
+(package! gitignore-mode
+	  :recipe (:host github :repo "magit/git-modes"
+			 :files ("gitignore-mode.el")))
+;; (unpin! org-mode)
