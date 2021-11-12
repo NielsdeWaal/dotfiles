@@ -59,6 +59,33 @@ dotfiles:
   f_config_rofi_config.rasi:
     src: config/rofi/config.rasi
     dst: ~/.config/rofi/config.rasi
+  f_xmonad_xpm_calendar-clock-icon_20.xpm:
+    src: xmonad/xpm/calendar-clock-icon_20.xpm
+    dst: ~/.xmonad/xpm/calendar-clock-icon_20.xpm
+  f_xmonad_xpm_cpu_20.xpm:
+    src: xmonad/xpm/cpu_20.xpm
+    dst: ~/.xmonad/xpm/cpu_20.xpm
+  f_xmonad_xpm_harddisk-icon_20.xpm:
+    src: xmonad/xpm/harddisk-icon_20.xpm
+    dst: ~/.xmonad/xpm/harddisk-icon_20.xpm
+  f_xmonad_xpm_haskell_20.xpm:
+    src: xmonad/xpm/haskell_20.xpm
+    dst: ~/.xmonad/xpm/haskell_20.xpm
+  f_xmonad_xpm_memory-icon_20.xpm:
+    src: xmonad/xpm/memory-icon_20.xpm
+    dst: ~/.xmonad/xpm/memory-icon_20.xpm
+  f_xmonad_xpm_net_down_20.xpm:
+    src: xmonad/xpm/net_down_20.xpm
+    dst: ~/.xmonad/xpm/net_down_20.xpm
+  f_xmonad_xpm_net_up_20.xpm:
+    src: xmonad/xpm/net_up_20.xpm
+    dst: ~/.xmonad/xpm/net_up_20.xpm
+  f_config_rofi_config:
+    src: config/rofi/config
+    dst: ~/.config/rofi/config
+  f_config_rofi_config.rasi_1:
+    src: config/rofi/config.rasi
+    dst: ~/.config/rofi/config.rasi
 profiles:
   WS500:
     dotfiles:
@@ -74,6 +101,15 @@ profiles:
     - f_config_zathura_zathurarc
     - f_config_xmobar_xmobarrc0
     - f_zshrc
+    - f_xmonad_xpm_calendar-clock-icon_20.xpm
+    - f_xmonad_xpm_cpu_20.xpm
+    - f_xmonad_xpm_harddisk-icon_20.xpm
+    - f_xmonad_xpm_haskell_20.xpm
+    - f_xmonad_xpm_memory-icon_20.xpm
+    - f_xmonad_xpm_net_down_20.xpm
+    - f_xmonad_xpm_net_up_20.xpm
+    - f_config_rofi_config
+    - f_config_rofi_config.rasi_1
   GLaDOS:
     dotfiles:
     - f_zshrc_1

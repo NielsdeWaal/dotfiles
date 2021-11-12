@@ -7,6 +7,10 @@ import qualified XMonad.StackSet as W
 -- Actions
 import XMonad.Actions.MouseResize
 
+-- Data
+import Data.Monoid
+import Data.List
+
 -- Hooks
 import XMonad.Actions.CycleWS (nextScreen, prevScreen)
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarColor, shorten, PP(..))
@@ -127,6 +131,15 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange $ T.toggleLayouts float
                                  -- ||| threeCol
                                  -- ||| threeRow
 
+-- Window behaviour
+-- Making sure that capture windows for org-protocol launch in a floating window
+myManageHook = composeAll . concat $
+    [ [className =? "CAPTURE"        --> doFloat]
+    -- , [className =? "zoom"           --> doFloat]
+    , [ fmap ( c `isInfixOf`) title --> doFloat | c <- ["CAPTURE"]]
+    , [ fmap ( c `isInfixOf`) title --> doFloat | c <- ["zoom"]]]
+
+
 -- Keybindings
 myKeys :: [(String, X ())]
 myKeys =
@@ -153,13 +166,15 @@ myKeys =
         -- , ("M-,", prevScreen)  -- Switch focus to prev monitor
 
         -- Emacs
-        , ("C-e e", spawn "emacs")
-        , ("C-e m", spawn "emacsclient -c -a 'emacs' --eval '(mu4e)'")
+        , ("M-o e", spawn "emacs")
+        , ("M-o m", spawn "emacsclient -c -a 'emacs' --eval '(mu4e)'")
         -- Other applications
-        , ("C-o p", spawn "pavucontrol")
-        , ("C-o s", spawn "deepin-screenshot")
-        , ("C-o z", spawn "zathura")
-        , ("C-o c", spawn "chatterino")
+        , ("M-o p", spawn "pavucontrol")
+        , ("M-o s", spawn "deepin-screenshot")
+        , ("M-o z", spawn "zathura")
+        , ("M-o c", spawn "chatterino")
+        -- Kill some specific applications
+        , ("M1-k t", spawn "pkill teams")
         ]
         
 -- Loghook
@@ -171,12 +186,12 @@ main :: IO ()
 main = do
     xmproc0 <- spawnPipe "xmobar -x 0 /home/niels/.config/xmobar/xmobarrc0"
     xmonad $ ewmh def
-        { manageHook = ( isFullscreen --> doFullFloat ) <+> manageDocks
+        { --manageHook = ( isFullscreen --> doFullFloat ) <+> manageDocks
         -- Run xmonad commands from command line with "xmonadctl command". Commands include:
         -- shrink, expand, next-layout, default-layout, restart-wm, xterm, kill, refresh, run,
         -- focus-up, focus-down, swap-up, swap-down, swap-master, sink, quit-wm. You can run
         -- "xmonadctl 0" to generate full list of commands written to ~/.xsession-errors.
-        , handleEventHook    = serverModeEventHookCmd
+        handleEventHook    = serverModeEventHookCmd
                                <+> serverModeEventHook
                                <+> serverModeEventHookF "XMONAD_PRINT" (io . putStrLn)
                                <+> docksEventHook
@@ -184,6 +199,7 @@ main = do
         , terminal           = myTerminal
         , startupHook        = myStartupHook
         , layoutHook         = myLayoutHook
+        , manageHook         = myManageHook
         , workspaces         = myWorkspaces
         , borderWidth        = myBorderWidth
         , normalBorderColor  = myNormColor

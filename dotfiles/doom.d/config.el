@@ -243,8 +243,3 @@
 
 ;; LSP
 (setq lsp-ui-doc-enable nil)
-;; (setq cider-jack-in-dependencies
-;;       (delete-dups
-;;        (append
-;;         cider-jack-in-dependencies
-;;         lispy-cider-jack-in-dependencies)))
