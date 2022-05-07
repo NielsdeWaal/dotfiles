@@ -16,7 +16,23 @@ export ZSH="/home/niels/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="robbyrussell"
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="spaceship"
+
+SPACESHIP_PROMPT_ORDER=(
+	time
+	# vi_mode
+	user
+	host
+	char
+	dir
+	git
+	venv
+	rust
+	line_sep
+	exec_time
+	exit_code
+)
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -78,6 +94,9 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git
 	zsh-completions
+	zsh-syntax-highlighting
+	zsh-autosuggestions
+	copypath
 	fzf)
 
 source $ZSH/oh-my-zsh.sh
@@ -99,6 +118,7 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
+export KEYID=0x0F87C4C2C61A99111A92A1C75772008B324C463F
 export GPG_TTY="$(tty)"
 export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
 gpg-connect-agent updatestartuptty /bye > /dev/null
@@ -106,6 +126,13 @@ gpg-connect-agent updatestartuptty /bye > /dev/null
 export STARSHIP_CONFIG=~/.starship
 
 alias dotdrop='dotdrop --cfg=~/dotfiles/config.yaml'
+
+alias l='exa -lah'
+alias find='fd'
+alias zathura='zathura --fork'
+alias EDownloads='cd /mnt/Elysium/Downloads/'
+alias EDocuments='cd /mnt/Elysium/Documents/'
+alias Master='cd /mnt/Elysium/Documents/Niels/Master/'
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -117,6 +144,6 @@ alias dotdrop='dotdrop --cfg=~/dotfiles/config.yaml'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
- [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 #eval "$(starship init zsh)"
